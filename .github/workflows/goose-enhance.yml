@@ -21,7 +21,7 @@ jobs:
         run: just get
 
       - name: Run Goose
-        uses: michaelneale/goose-fix-it-action@v5
+        uses: michaelneale/goose-fix-it-action@v7
         with:
           task_request: |
             ${{ github.event.issue.title }}
