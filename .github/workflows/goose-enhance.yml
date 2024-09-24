@@ -1,0 +1,41 @@
+name: Goose
+
+on:
+  issues:
+    types:
+      - labeled
+      
+jobs:
+  flutter-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Init Hermit
+        uses: cashapp/activate-hermit@v1
+        with:
+          cache: true
+
+      - name: Install Dependencies
+        run: just get
+
+      - name: Run Goose
+        uses: michaelneale/goose-fix-it-action@v5
+        with:
+          task_request: |
+            ${{ github.event.issue.title }}
+            
+            ${{ github.event.issue.body }}
+            
+            [Link to issue](${{ github.event.issue.html_url }})
+          validation: "run just test"
+          create_pr: 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}        
+
+      - name: Run Flutter Analyze
+        run: just analyze
+
+      - name: Run Flutter Test
+        run: just test
