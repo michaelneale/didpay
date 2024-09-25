@@ -12,6 +12,7 @@ final accountBalanceProvider =
 );
 
 class AccountBalanceNotifier extends AutoDisposeAsyncNotifier<AccountBalance?> {
+
   Timer? _timer;
 
   @override
