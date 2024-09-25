@@ -3,6 +3,7 @@ import 'package:didpay/l10n/app_localizations.dart';
 import 'package:didpay/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:didpay/shared/request_cache_hook.dart';
 
 class App extends HookConsumerWidget {
   const App({super.key});
