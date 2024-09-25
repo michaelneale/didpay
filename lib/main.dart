@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'features/auth/biometric_auth_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
