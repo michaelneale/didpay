@@ -1,0 +1,4 @@
+This is a flutter mobile app called DidPay - and the code is written in dart. 
+You can consult the README.md for more background information. 
+
+It is built with a Justfile with the `just` command, and `just test` will ensure it is healthy. 
