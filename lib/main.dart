@@ -33,6 +33,13 @@ void main() async {
 
   final overrides = await notifierOverrides();
 
+  final biometricAuthService = BiometricAuthService();
+  final authenticated = await biometricAuthService.authenticate();
+
+  if (!authenticated) {
+    return;
+  }
+
   runApp(
     ProviderScope(
       overrides: [
