@@ -32,8 +32,9 @@ class SendPage extends HookConsumerWidget {
         child: dap.value != null
             ? dap.value!.when(
                 data: (_) => Container(),
-                loading: () =>
-                    LoadingMessage(message: Loc.of(context).verifyingDap),
+                loading: () => const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: CircularProgressIndicator(strokeWidth: 2),),
                 error: (error, _) => ErrorMessage(
                   message: error.toString(),
                   onRetry: () => dap.value = null,
