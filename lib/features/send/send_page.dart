@@ -29,52 +29,44 @@ class SendPage extends HookConsumerWidget {
     return Scaffold(
       appBar: _buildAppBar(context, featureFlags),
       body: SafeArea(
-        child: dap.value != null
-            ? dap.value!.when(
-                data: (_) => Container(),
-                loading: () =>
-                    LoadingMessage(message: Loc.of(context).verifyingDap),
-                error: (error, _) => ErrorMessage(
-                  message: error.toString(),
-                  onRetry: () => dap.value = null,
-                ),
-              )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Header(
-                    title: Loc.of(context).whoDoYouWantToPay,
-                    subtitle: Loc.of(context).enterADap,
-                  ),
-                  Expanded(
-                    child: DapForm(
-                      buttonTitle: Loc.of(context).next,
-                      dapText: dapText,
-                      dap: dap,
-                      onSubmit: (recipientDap, moneyAddresses) async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => PaymentAmountPage(
-                              paymentState: PaymentState(
-                                transactionType: TransactionType.send,
-                                paymentDetailsState: PaymentDetailsState(
-                                  paymentName: recipientDap.dap,
+        child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Header(
+                      title: Loc.of(context).whoDoYouWantToPay,
+                      subtitle: Loc.of(context).enterADap,
+                    ),
+                    Expanded(
+                      child: DapForm(
+                        buttonTitle: Loc.of(context).next,
+                        dapText: dapText,
+                        dap: dap,
+                        onSubmit: (recipientDap, moneyAddresses) async {
+                          await Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => PaymentAmountPage(
+                                paymentState: PaymentState(
+                                  transactionType: TransactionType.send,
+                                  paymentDetailsState: PaymentDetailsState(
+                                    paymentName: recipientDap.dap,
+                                  ),
+                                ),
+                                dapState: DapState(
+                                  moneyAddresses: moneyAddresses,
                                 ),
                               ),
-                              dapState: DapState(
-                                moneyAddresses: moneyAddresses,
-                              ),
+                              fullscreenDialog: true,
                             ),
-                            fullscreenDialog: true,
-                          ),
-                        );
+                          );
 
-                        if (context.mounted) dap.value = null;
-                      },
+                          if (context.mounted) dap.value = null;
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                    if (dap.value?.isLoading == true)
+                      SizedBox(width: 16, height: 16, child: CircularProgressIndicator()),
+                  ],
+                )
       ),
     );
   }
