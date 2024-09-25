@@ -6,7 +6,8 @@ on:
       - labeled
       
 jobs:
-  flutter-test:
+  goose-enhance:
+    if: github.event.label.name == 'goose'
     runs-on: ubuntu-latest
 
     steps:
