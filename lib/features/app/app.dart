@@ -1,4 +1,4 @@
-import 'package:didpay/features/app/app_tabs.dart';
+import 'package:didpay/features/auth/biometric_auth_page.dart';
 import 'package:didpay/l10n/app_localizations.dart';
 import 'package:didpay/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +12,11 @@ class App extends HookConsumerWidget {
         title: 'DIDPay',
         theme: lightTheme(context),
         darkTheme: darkTheme(context),
-        home: const AppTabs(),
+        home: BiometricAuthPage(),
         localizationsDelegates: Loc.localizationsDelegates,
         supportedLocales: const [
           Locale('en', ''),
         ],
       );
 }
+
